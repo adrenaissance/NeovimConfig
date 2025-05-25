@@ -65,6 +65,15 @@ return {
       },
     }
 
+    -- Format the current file on save (auto-format before writing to disk)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*.go",  -- Apply to Go files
+      callback = function()
+        -- Format using LSP before saving the file
+        vim.lsp.buf.format({ async = false })
+      end,
+    })
+
     -- Optional: Auto-organize imports on save
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = "*.go",
