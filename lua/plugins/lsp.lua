@@ -1,4 +1,4 @@
- vim.lsp.config['luals'] = {
+vim.lsp.config['luals'] = {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
   root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
@@ -26,11 +26,20 @@ vim.lsp.config['gopls'] = {
   }
 }
 
+vim.lsp.config['actionlint'] = {
+  cmd = { 'actionlint' },
+  filetypes = { '.yaml', '.yml' },
+  on_attach = function(client, bufnr)
+  end
+}
+
 return {
   "neovim/nvim-lspconfig",
-  config = function ()
+  config = function()
     vim.lsp.enable('luals')
     vim.lsp.enable('gopls')
+    vim.lsp.enable('eslint')
+    vim.lsp.enable('actionlint')
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('my.lsp', {}),
@@ -40,21 +49,12 @@ return {
           -- Create a keymap for vim.lsp.buf.implementation ...
         end
 
-        -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
-        if client:supports_method('textDocument/completion') then
-          -- Optional: trigger autocompletion on EVERY keypress. May be slow!
-          -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
-          -- client.server_capabilities.completionProvider.triggerCharacters = chars
-
-          vim.lsp.completion.enable(true, client.id, args.buf, {autotrigger = true})
-        end
-
         -- Auto-format ("lint") on save.
         -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
         if not client:supports_method('textDocument/willSaveWaitUntil')
             and client:supports_method('textDocument/formatting') then
           vim.api.nvim_create_autocmd('BufWritePre', {
-            group = vim.api.nvim_create_augroup('my.lsp', {clear=false}),
+            group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
             buffer = args.buf,
             callback = function()
               vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
@@ -65,7 +65,7 @@ return {
             pattern = "*.go",
             callback = function()
               local params = vim.lsp.util.make_range_params()
-              params.context = {only = {"source.organizeImports"}}
+              params.context = { only = { "source.organizeImports" } }
               -- buf_request_sync defaults to a 1000ms timeout. Depending on your
               -- machine and codebase, you may want longer. Add an additional
               -- argument after params if you find that you have to write the file
@@ -80,13 +80,11 @@ return {
                   end
                 end
               end
-              vim.lsp.buf.format({async = false})
+              vim.lsp.buf.format({ async = false })
             end
           })
-
         end
       end,
     })
   end,
 }
-
