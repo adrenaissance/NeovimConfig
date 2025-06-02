@@ -14,9 +14,10 @@ return {
     },
   },
   keys = {
-    { "<leader>f",  "<cmd>Telescope find_files<cr>",  desc = "find files",  mode = "n" },
-    { "<leader>gr", "<cmd>Telescope live_grep<cr>",   desc = "live_grep",   mode = "n" },
-    { "<leader>tc", "<cmd>Telescope colorscheme<cr>", desc = "colorscheme", mode = "n" },
+    { "<leader>f",  "<cmd>Telescope find_files<cr>",  desc = "find files",       mode = "n" },
+    { "<leader>gr", "<cmd>Telescope live_grep<cr>",   desc = "live_grep",        mode = "n" },
+    { "<leader>tc", "<cmd>Telescope colorscheme<cr>", desc = "colorscheme",      mode = "n" },
+    { "<leader>ld", "<cmd>Telescope diagnostics<cr>", desc = "lisp diagnostics", mode = "n" },
   },
   pickers = {
     colorscheme = {

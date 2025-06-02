@@ -29,8 +29,6 @@ vim.lsp.config['gopls'] = {
 vim.lsp.config['actionlint'] = {
   cmd = { 'actionlint' },
   filetypes = { '.yaml', '.yml' },
-  on_attach = function(client, bufnr)
-  end
 }
 
 return {
@@ -39,7 +37,7 @@ return {
     vim.lsp.enable('luals')
     vim.lsp.enable('gopls')
     vim.lsp.enable('eslint')
-    vim.lsp.enable('actionlint')
+    vim.lsp.enable('ts_ls')
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('my.lsp', {}),
