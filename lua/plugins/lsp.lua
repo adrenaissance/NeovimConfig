@@ -13,12 +13,30 @@ vim.lsp.config['luals'] = {
   }
 }
 
+vim.lsp.config['yamlls'] = {
+  settings = {
+    yaml = {
+      validate = true,
+      hover = true,
+      completion = true,
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+      },
+    },
+  },
+}
+
+
 vim.lsp.config['gopls'] = {
   cmd = { 'gopls' },
   settings = {
     gopls = {
       analyses = {
         unusedparams = true,
+        unusedvariables = true,
+        unreachable = true,
+        QF1002 = true,
+        S1005 = true,
       },
       staticcheck = true,
       gofumpt = true,
@@ -26,18 +44,18 @@ vim.lsp.config['gopls'] = {
   }
 }
 
-vim.lsp.config['actionlint'] = {
-  cmd = { 'actionlint' },
-  filetypes = { '.yaml', '.yml' },
-}
-
 return {
   "neovim/nvim-lspconfig",
   config = function()
+    vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { noremap = true, silent = true })
+
     vim.lsp.enable('luals')
     vim.lsp.enable('gopls')
-    vim.lsp.enable('eslint')
     vim.lsp.enable('ts_ls')
+    vim.lsp.enable('yamlls')
+    vim.lsp.enable('biome')
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('my.lsp', {}),
@@ -78,7 +96,7 @@ return {
                   end
                 end
               end
-              vim.lsp.buf.format({ async = false })
+              vim.lsp.buf.format({ async = true })
             end
           })
         end

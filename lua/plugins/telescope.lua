@@ -10,6 +10,7 @@ return {
         "%.o$",          -- ignore object files
         "%.pyc$",        -- ignore compiled python files
         "node_modules/", -- optional if you're doing JS
+        "public/",
       },
     },
   },
