@@ -1,3 +1,5 @@
+local pid = vim.fn.getpid()
+
 vim.lsp.config['luals'] = {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
@@ -23,6 +25,15 @@ vim.lsp.config['yamlls'] = {
         ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
       },
     },
+  },
+}
+
+vim.lsp.config['omnisharp'] = {
+  cmd = {
+    "OmniSharp",
+    "--languageserver",
+    "--hostPID",
+    tostring(pid),
   },
 }
 
@@ -56,6 +67,7 @@ return {
     vim.lsp.enable('ts_ls')
     vim.lsp.enable('yamlls')
     vim.lsp.enable('biome')
+    vim.lsp.enable('omnisharp')
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('my.lsp', {}),
