@@ -1,2 +1,2 @@
-e-ink
-dark
+rose-pine
+light
