@@ -6,7 +6,7 @@ return {
       ensure_installed = {
         "json",
       },
-      highlight = { enable = true },
+      highlight = { enable = false },
       indent = { enable = true },
     })
   end

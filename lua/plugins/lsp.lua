@@ -68,6 +68,7 @@ return {
     vim.lsp.enable('yamlls')
     vim.lsp.enable('biome')
     vim.lsp.enable('omnisharp')
+    vim.lsp.enable('cssls')
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('my.lsp', {}),
