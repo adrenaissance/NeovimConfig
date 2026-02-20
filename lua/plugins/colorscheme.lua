@@ -31,13 +31,4 @@ return {
       pcall(vim.cmd.colorscheme, scheme)
     end,
   },
-  {
-    "huyvohcmc/atlas.vim",
-    name = "noir"
-  },
-  {
-    "e-ink-colorscheme/e-ink.nvim",
-    name = "ink",
-    priority = 1000,
-  },
 }
