@@ -66,7 +66,6 @@ return {
     vim.lsp.enable('gopls')
     vim.lsp.enable('ts_ls')
     vim.lsp.enable('yamlls')
-    vim.lsp.enable('biome')
     vim.lsp.enable('omnisharp')
     vim.lsp.enable('cssls')
 

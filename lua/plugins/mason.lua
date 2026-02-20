@@ -20,9 +20,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "terraformls", "gopls" },
-      })
+      require("mason-lspconfig").setup({})
     end,
   },
 
