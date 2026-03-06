@@ -9,7 +9,7 @@ return {
         auto_trigger = true,
         debounce = 75,        -- ms delay before suggestion
         keymap = {
-          accept = "<Tab>",   -- accept suggestion inline
+          accept = "<C-j>",   -- accept suggestion inline
           next = "<C-]>",     -- optional: next suggestion
           prev = "<C-[>",     -- optional: previous suggestion
           dismiss = "<C-\\>", -- optional: dismiss suggestion

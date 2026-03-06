@@ -1,5 +1,11 @@
 local pid = vim.fn.getpid()
 
+vim.lsp.config['ts_ls'] = {
+  cmd = { 'typescript-language-server', '--stdio' },
+  filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
+  root_markers = { 'package.json', 'tsconfig.json', '.git' },
+}
+
 vim.lsp.config['luals'] = {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
@@ -15,6 +21,18 @@ vim.lsp.config['luals'] = {
   }
 }
 
+vim.lsp.config['cssls'] = {
+  cmd = { 'vscode-css-language-server', '--stdio' },
+  filetypes = { 'css', 'scss', 'less' },
+  root_markers = { 'package.json', '.git' },
+}
+
+vim.lsp.config['html'] = {
+  cmd = { 'vscode-html-language-server', '--stdio' },
+  filetypes = { 'html' },
+  root_markers = { 'package.json', '.git' },
+}
+
 vim.lsp.config['yamlls'] = {
   settings = {
     yaml = {
@@ -25,15 +43,6 @@ vim.lsp.config['yamlls'] = {
         ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
       },
     },
-  },
-}
-
-vim.lsp.config['omnisharp'] = {
-  cmd = {
-    "OmniSharp",
-    "--languageserver",
-    "--hostPID",
-    tostring(pid),
   },
 }
 
@@ -55,6 +64,17 @@ vim.lsp.config['gopls'] = {
   }
 }
 
+vim.lsp.config['tailwindcss'] = {
+  cmd = { 'tailwindcss-language-server', '--stdio' },
+  filetypes = {
+    'html',
+    'css', 'scss', 'less',
+    "ts", "tsx", "jsx", "javascript", "typescript",
+    "vue", "svelte", "astro", "mdx"
+  },
+  root_markers = { 'package.json', '.git' },
+}
+
 return {
   "neovim/nvim-lspconfig",
   config = function()
@@ -66,8 +86,9 @@ return {
     vim.lsp.enable('gopls')
     vim.lsp.enable('ts_ls')
     vim.lsp.enable('yamlls')
-    vim.lsp.enable('omnisharp')
     vim.lsp.enable('cssls')
+    vim.lsp.enable('html')
+    vim.lsp.enable('tailwindcss')
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('my.lsp', {}),
